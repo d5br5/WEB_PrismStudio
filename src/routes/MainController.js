@@ -7,9 +7,11 @@ import Loading from "../components/Loading";
 import * as constants from "../assets/const";
 
 const MainController = () => {
-    const [mode, setMode] = useState(constants.LIST);
+    const [mode, setMode] = useState(constants.MAP);
     const [init, setInit] = useState(false);
     const [shopList, setShopList] = useState([]);
+    const [shopNum, setShop] = useState(0);
+    const [shopSelected, setShopSelected] = useState(false);
 
     useEffect(() => {
         const db = getFirestore(app);

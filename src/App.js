@@ -1,7 +1,11 @@
 import MainController from "./routes/MainController";
+import {GlobalStyles} from "./styles";
 
 function App() {
-    return <MainController/>
+    return <>
+        <GlobalStyles/>
+        <MainController/>
+    </>
 }
 
 export default App;

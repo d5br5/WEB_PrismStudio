@@ -1,21 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import * as constants from "../assets/const";
-
-const Container = styled.div`
-
-`;
-
-const Button = styled.button`
-  height: 20px;
-`
 
 const Navigator = ({mode, setMode}) => {
     console.log(constants.MAP)
-    return <Container>
+    return <ButtonGroup variant="contained" sx={{position:"absolute", top:"30px", zIndex:1}} aria-label="outlined primary button group">
         <Button onClick={() => setMode(constants.MAP)}>{constants.MAP}</Button>
         <Button onClick={() => setMode(constants.LIST)}>{constants.LIST}</Button>
-    </Container>;
+    </ButtonGroup>;
 }
 
 export default Navigator;
