@@ -20,14 +20,14 @@ const Link = styled.a`
   text-decoration: none;
 `
 
-// const Name = styled.div`
-//   width: 400px;
-// `;
-//
-// const Index = styled.div`
-//   width: 100px;
-//   text-align: center;
-// `;
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Info = styled.div`
+  margin: 5px 0;
+`;
 
 const Shop = ({shop, index}) => {
     const [expanded, setExpanded] = React.useState(false);
@@ -48,18 +48,25 @@ const Shop = ({shop, index}) => {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography sx={{width: '40%', flexShrink: 0}}>
+                    <Typography sx={{width: '50%', flexShrink: 0}}>
                         {shop.name}
                     </Typography>
                     <Typography sx={{color: 'text.secondary'}}>{shop.address}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {shop.id}
+                        <InfoContainer>
+                            <Info>shop ID : {shop.id}</Info>
+                            <Info>연락처 : {shop.contact}</Info>
+                            <Info>기준 인원 : {shop.basePeople}명 </Info>
+                            <Info>기준 가격 : {shop.basePrice}원</Info>
+                            <Info>네이버 평점 : {shop.grade} / 5.0</Info>
+                            <Info>네이버 리뷰 수 : {shop.reviewNum}개</Info>
+                        </InfoContainer>
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Link href={`${shop.website}`} rel="noreferrer" target={"_blank"}>
+            <Link href={`${shop.reservationLink}`} rel="noreferrer" target={"_blank"}>
                 <Button variant="outlined" sx={{height: "35px", marginLeft: "20px"}}>
                     예약
                 </Button>

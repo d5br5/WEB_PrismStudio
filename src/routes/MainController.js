@@ -17,7 +17,7 @@ const MainController = () => {
         const db = getFirestore(app);
 
         async function getAllShops() {
-            const data = await getDocs(collection(db, "shops"));
+            const data = await getDocs(collection(db, "geotest"));
             const list = [];
             data.forEach((onedata) => {
                 const frame = {id: onedata.id, ...onedata.data()};
