@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {collection, getDocs, getFirestore} from "firebase/firestore";
+import {collection, getDocs, getFirestore, orderBy} from "firebase/firestore";
 import app from "../fbase";
 
 import MainPresenter from "./MainPresenter";
@@ -17,7 +17,7 @@ const MainController = () => {
         const db = getFirestore(app);
 
         async function getAllShops() {
-            const data = await getDocs(collection(db, "geotest"));
+            const data = await getDocs(collection(db, "geotest" ), orderBy("name", "asc"));
             const list = [];
             data.forEach((onedata) => {
                 const frame = {id: onedata.id, ...onedata.data()};
