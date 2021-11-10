@@ -6,6 +6,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import {getGrade} from "../assets/getGrade";
 
 const Container = styled.div`
   width: 100%;
@@ -38,8 +39,6 @@ const Shop = ({shop, index}) => {
 
     return (
         <Container>
-            {/*<dex>{index + 1}</dex>*/}
-            {/*<Name> {shop.name}</Name>*/}
             <Accordion expanded={expanded === 'panel1'}
                        sx={{width: "70%"}}
                        onChange={handleChange('panel1')}>
@@ -48,7 +47,10 @@ const Shop = ({shop, index}) => {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography sx={{width: '50%', flexShrink: 0}}>
+                    <Typography sx={{width: '17%', flexShrink: 0}}>
+                        {getGrade(shop.grade)}
+                    </Typography>
+                    <Typography sx={{width: '43%', flexShrink: 0}}>
                         {shop.name}
                     </Typography>
                     <Typography sx={{color: 'text.secondary'}}>{shop.address}</Typography>
@@ -56,12 +58,12 @@ const Shop = ({shop, index}) => {
                 <AccordionDetails>
                     <Typography>
                         <InfoContainer>
-                            <Info>shop ID : {shop.id}</Info>
-                            <Info>연락처 : {shop.contact}</Info>
-                            <Info>기준 인원 : {shop.basePeople}명 </Info>
-                            <Info>기준 가격 : {shop.basePrice}원</Info>
-                            <Info>네이버 평점 : {shop.grade} / 5.0</Info>
+                            {/*<Info>shop ID : {shop.id}</Info>*/}
+                            <Info>네이버 평점 : {shop.grade === 'x' ? `정보 없음` : `${shop.grade} / 5.0`}</Info>
                             <Info>네이버 리뷰 수 : {shop.reviewNum}개</Info>
+                            <Info>기준 인원 : {shop.basePeople === 'x' ? `정보 없음` : `${shop.basePeople}명`} </Info>
+                            <Info>기준 가격 : {shop.basePrice === 'x' ? `정보 없음` : `${shop.basePrice.format()}원`}</Info>
+                            <Info>연락처 : {shop.contact}</Info>
                         </InfoContainer>
                     </Typography>
                 </AccordionDetails>

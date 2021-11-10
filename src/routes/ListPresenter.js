@@ -1,7 +1,7 @@
 import React from "react";
 import Shop from "../components/Shop";
 import styled from "styled-components";
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { collection, setDoc, getFirestore, doc } from "firebase/firestore";
 import app from "../fbase"
 import {infos} from "../assets/geoInfos"
 
@@ -12,8 +12,9 @@ const Container = styled.div`
 
 const upload = async ()=>{
     const db = getFirestore(app);
-    for (const data of infos) {
-        await addDoc(collection(db, "geotest"), data)
+    for (let  i=0; i<infos.length; i++){
+        const data = infos[i];
+        await setDoc(doc(db, "geotest5", i.toString()), data);
     }
 }
 

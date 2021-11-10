@@ -2,7 +2,10 @@ import styled from "styled-components";
 import ListPresenter from "./ListPresenter";
 import * as constants from "../assets/const";
 import Navigator from "../components/Navigator";
+import Filter from "../components/Filter";
 import MapController from "./MapController";
+import {useState} from "react";
+
 
 const Container = styled.div`
   display: flex;
@@ -11,11 +14,32 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
+
+
 const MainPresenter = ({shopList, mode, setMode}) => {
+    const [filterList, setFilterList] = useState([]);
+    const [filterEditing, setFilterEditing] = useState(true);
+
+    const filterFn = (shop) => {
+        const minPriceStandard = parseInt(shop.basePrice) >= filterList[0];
+        const maxPriceStandard = parseInt(shop.basePrice) <= filterList[1];
+        const PriceStandard = (minPriceStandard && maxPriceStandard) || shop.basePrice==="x"
+
+        const minGradeStandard = parseFloat(shop.grade) >= filterList[2];
+        const maxGradeStandard = parseFloat(shop.grade) <= filterList[3];
+        const GradeStandard = (minGradeStandard && maxGradeStandard) ;
+
+        return PriceStandard && GradeStandard;
+    }
+
+    console.log(filterList);
     return <Container>
         <Navigator mode={mode} setMode={setMode}/>
-        {mode === constants.LIST && <ListPresenter shopList={shopList}/>}
-        {mode === constants.MAP && <MapController shopList={shopList}/>}
+        <Filter setFilterEditing={setFilterEditing} filterEditing={filterEditing} setFilterList={setFilterList}/>
+        {mode === constants.LIST &&
+        <ListPresenter shopList={filterList.length === 0 ? shopList : shopList.filter(filterFn)}/>}
+        {mode === constants.MAP &&
+        <MapController shopList={filterList.length === 0 ? shopList : shopList.filter(filterFn)}/>}
     </Container>
 }
 
