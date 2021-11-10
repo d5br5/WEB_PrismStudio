@@ -48,7 +48,6 @@ const Filter = ({filterEditing, setFilterEditing, setFilterList}) => {
         setFilterEditing(true);
     };
 
-
     const onFilterSubmit = () => {
         setFilterList([...priceRange,...gradeRange]);
         setFilterEditing(false);
@@ -62,7 +61,7 @@ const Filter = ({filterEditing, setFilterEditing, setFilterList}) => {
     }
 
     return <Accordion expanded={expanded === 'panel1'}
-                      sx={{width: "300px", position: "absolute", top: "30px", right: "100px", zIndex: 30}}
+                      sx={{width: "300px", position: "absolute", top: "40px", right: "100px", zIndex: 30}}
                       onChange={handleChange('panel1')}>
         <AccordionSummary
             expandIcon={<ExpandMoreIcon/>}

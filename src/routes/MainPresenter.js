@@ -5,6 +5,7 @@ import Navigator from "../components/Navigator";
 import Filter from "../components/Filter";
 import MapController from "./MapController";
 import {useState} from "react";
+import Logo from "../components/Logo";
 
 
 const Container = styled.div`
@@ -23,17 +24,18 @@ const MainPresenter = ({shopList, mode, setMode}) => {
     const filterFn = (shop) => {
         const minPriceStandard = parseInt(shop.basePrice) >= filterList[0];
         const maxPriceStandard = parseInt(shop.basePrice) <= filterList[1];
-        const PriceStandard = (minPriceStandard && maxPriceStandard) || shop.basePrice==="x"
+        const PriceStandard = (minPriceStandard && maxPriceStandard) || shop.basePrice === "x"
 
         const minGradeStandard = parseFloat(shop.grade) >= filterList[2];
         const maxGradeStandard = parseFloat(shop.grade) <= filterList[3];
-        const GradeStandard = (minGradeStandard && maxGradeStandard) ;
+        const GradeStandard = (minGradeStandard && maxGradeStandard);
 
         return PriceStandard && GradeStandard;
     }
 
     console.log(filterList);
     return <Container>
+        <Logo/>
         <Navigator mode={mode} setMode={setMode}/>
         <Filter setFilterEditing={setFilterEditing} filterEditing={filterEditing} setFilterList={setFilterList}/>
         {mode === constants.LIST &&
