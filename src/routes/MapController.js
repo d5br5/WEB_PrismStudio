@@ -38,10 +38,10 @@ const MapController = ({shopList}) => {
                     <div style="margin-bottom: 13px">연락처 : ${shopList[i].contact}</div>
                     <div style="margin-bottom: 2px; display: flex; flex-direction: row; justify-content: space-around">
                         <a href=${shopList[i].reservationLink} rel="noreferrer" target="_blank"> 
-                            <button>예약하기</button>
+                            <button style="border: 1px #e74c3c solid; border-radius:2px; background-color: white; color: #e74c3c; line-height: 17px">예약하기</button>
                         </a>
                         <a href=${shopList[i].website} rel="noreferrer" target="_blank">
-                            <button>홈페이지</button>
+                            <button style="border: 1px #2980b9 solid; border-radius:2px; background-color: white; color: #2980b9;  line-height: 17px">홈페이지</button>
                         </a>
                     </div>
                 </div>
