@@ -31,7 +31,7 @@ const MainController = () => {
         const db = getFirestore(app);
 
         async function getAllShops() {
-            const data = await getDocs(collection(db, "geotest5"), orderBy("name", "asc"));
+            const data = await getDocs(collection(db, "geotest8"), orderBy("name", "asc"));
             const list = [];
             data.forEach((onedata) => {
                 const frame = {id: onedata.id, ...onedata.data()};

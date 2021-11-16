@@ -30,7 +30,9 @@ const MainPresenter = ({shopList, mode, setMode}) => {
         const maxGradeStandard = parseFloat(shop.grade) <= filterList[3];
         const GradeStandard = (minGradeStandard && maxGradeStandard);
 
-        return PriceStandard && GradeStandard;
+        const LocationStandard = filterList[4].length===0 || filterList[4].includes(shop.location)
+
+        return PriceStandard && GradeStandard && LocationStandard;
     }
 
     console.log(filterList);

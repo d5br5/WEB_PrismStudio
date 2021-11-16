@@ -6,7 +6,7 @@ import app from "../fbase"
 import {infos} from "../assets/geoInfos"
 
 const Container = styled.div`
-  margin-top: 70px;
+  margin-top: 90px;
   width: 1200px;
 `;
 
@@ -14,7 +14,7 @@ const upload = async ()=>{
     const db = getFirestore(app);
     for (let  i=0; i<infos.length; i++){
         const data = infos[i];
-        await setDoc(doc(db, "geotest5", i.toString()), data);
+        await setDoc(doc(db, "geotest8", i.toString()), data);
     }
 }
 

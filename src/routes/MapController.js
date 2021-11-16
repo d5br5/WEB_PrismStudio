@@ -32,7 +32,7 @@ const MapController = ({shopList}) => {
                 <div style="text-align: center; font-weight: 800; font-size: 18px; margin-bottom: 20px">${shopList[i].name}</div>
                 <div style="margin: auto">
                     <div style="margin-bottom: 7px">네이버 평점 : ${shopList[i].grade === "x" ? '정보 없음' : `${shopList[i].grade} / 5.0`}</div>
-                    <div style="margin-bottom: 13px">네이버 리뷰 수 : ${shopList[i].reviewNum}개</div>
+                    <div style="margin-bottom: 13px">네이버 블로그 리뷰 수 : ${shopList[i].reviewNum}개</div>
                     <div style="margin-bottom: 7px">기준 가격 : ${shopList[i].basePrice === "x" ? '정보 없음' : `${shopList[i].basePrice.format()}원`}</div>
                     <div style="margin-bottom: 13px">기준 인원 : ${shopList[i].basePeople === "x" ? '정보 없음' : `${shopList[i].basePeople}명`}</div>
                     <div style="margin-bottom: 13px">연락처 : ${shopList[i].contact}</div>

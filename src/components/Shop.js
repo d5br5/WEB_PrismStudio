@@ -47,20 +47,20 @@ const Shop = ({shop, index}) => {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography sx={{width: '17%', flexShrink: 0}}>
+                    <Typography sx={{width: '16%', flexShrink: 0, fontSize:"15px"}}>
                         {getGrade(shop.grade)}
                     </Typography>
-                    <Typography sx={{width: '43%', flexShrink: 0}}>
+                    <Typography sx={{width: '44%', flexShrink: 0,fontSize:"15px"}}>
                         {shop.name}
                     </Typography>
-                    <Typography sx={{color: 'text.secondary'}}>{shop.address}</Typography>
+                    <Typography sx={{color: 'text.secondary', fontSize:"15px"}}>{shop.address}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
                         <InfoContainer>
                             {/*<Info>shop ID : {shop.id}</Info>*/}
                             <Info>네이버 평점 : {shop.grade === 'x' ? `정보 없음` : `${shop.grade} / 5.0`}</Info>
-                            <Info>네이버 리뷰 수 : {shop.reviewNum}개</Info>
+                            <Info>네이버 블로그 리뷰 수 : {shop.reviewNum}개</Info>
                             <Info>기준 인원 : {shop.basePeople === 'x' ? `정보 없음` : `${shop.basePeople}명`} </Info>
                             <Info>기준 가격 : {shop.basePrice === 'x' ? `정보 없음` : `${shop.basePrice.format()}원`}</Info>
                             <Info>연락처 : {shop.contact}</Info>
