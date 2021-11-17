@@ -30,6 +30,64 @@ const Info = styled.div`
   margin: 5px 0;
 `;
 
+const Part1 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  @media only screen and (max-width: 1300px) {
+    flex-direction: column;
+  }
+
+`;
+const Part2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  @media only screen and (max-width: 1300px) {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+`;
+const Part3 = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const LinkContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+
+  @media only screen and (max-width: 1300px) {
+    flex-direction: column;
+  }
+`
+
+const CustomButton = styled(Button)`
+
+  height: 35px;
+  margin-left: 30px;
+
+  @media only screen and (max-width: 1300px) {
+    width: 100%;
+  }
+  
+`;
+
+const CustomTypo = styled(Typography)`
+  flex-shrink: 0;
+  font-size: 15px;
+  margin-bottom: 10px;
+  @media only screen and (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+`;
+
 const Shop = ({shop, index}) => {
     const [expanded, setExpanded] = React.useState(false);
 
@@ -37,8 +95,7 @@ const Shop = ({shop, index}) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    return (
-        <Container>
+    return (<Container>
             <Accordion expanded={expanded === 'panel1'}
                        sx={{width: "70%"}}
                        onChange={handleChange('panel1')}>
@@ -47,13 +104,19 @@ const Shop = ({shop, index}) => {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography sx={{width: '16%', flexShrink: 0, fontSize:"15px"}}>
-                        {getGrade(shop.grade)}
-                    </Typography>
-                    <Typography sx={{width: '44%', flexShrink: 0,fontSize:"15px"}}>
-                        {shop.name}
-                    </Typography>
-                    <Typography sx={{color: 'text.secondary', fontSize:"15px"}}>{shop.address}</Typography>
+                    <Part1>
+                        <Part2>
+                            <CustomTypo sx={{width:"25%"}}>
+                                {getGrade(shop.grade)}
+                            </CustomTypo>
+                            <CustomTypo sx={{width: '75%'}}>
+                                {shop.name}
+                            </CustomTypo>
+                        </Part2>
+                        <Part3>
+                            <CustomTypo sx={{color: 'text.secondary'}}>{shop.address}</CustomTypo>
+                        </Part3>
+                    </Part1>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -68,17 +131,18 @@ const Shop = ({shop, index}) => {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Link href={`${shop.reservationLink}`} rel="noreferrer" target={"_blank"}>
-                <Button variant="outlined" sx={{height: "35px", marginLeft: "20px"}}>
-                    예약
-                </Button>
-            </Link>
-            <Link href={`${shop.website}`} rel="noreferrer" target={"_blank"}>
-                <Button variant="outlined" color="success" sx={{height: "35px", marginLeft: "20px"}}>
-                    홈페이지 방문
-                </Button>
-            </Link>
-
+            <LinkContainer>
+                <Link href={`${shop.reservationLink}`} rel="noreferrer" target={"_blank"}>
+                    <CustomButton variant="outlined" sx={{fontSize:"0.9rem"}}>
+                        예약
+                    </CustomButton>
+                </Link>
+                <Link href={`${shop.website}`} rel="noreferrer" target={"_blank"}>
+                    <CustomButton variant="outlined" color="success" sx={{fontSize:"0.9rem"}}>
+                        홈페이지 방문
+                    </CustomButton>
+                </Link>
+            </LinkContainer>
         </Container>
     );
 };

@@ -5,6 +5,7 @@ import Navigator from "../components/Navigator";
 import Filter from "../components/Filter";
 import MapController from "./MapController";
 import {useState} from "react";
+import {useMediaQuery} from "react-responsive";
 import Logo from "../components/Logo";
 
 
@@ -30,16 +31,19 @@ const MainPresenter = ({shopList, mode, setMode}) => {
         const maxGradeStandard = parseFloat(shop.grade) <= filterList[3];
         const GradeStandard = (minGradeStandard && maxGradeStandard);
 
-        const LocationStandard = filterList[4].length===0 || filterList[4].includes(shop.location)
+        const LocationStandard = filterList[4].length === 0 || filterList[4].includes(shop.location)
 
         return PriceStandard && GradeStandard && LocationStandard;
     }
+    const isTabletOrMobile = useMediaQuery({maxWidth: 1300})
 
-    console.log(filterList);
+
     return <Container>
-        <Logo/>
-        <Navigator mode={mode} setMode={setMode}/>
+
+        {!isTabletOrMobile && <Logo/>}
+        {!isTabletOrMobile && <Navigator mode={mode} setMode={setMode}/>}
         <Filter setFilterEditing={setFilterEditing} filterEditing={filterEditing} setFilterList={setFilterList}/>
+
         {mode === constants.LIST &&
         <ListPresenter shopList={filterList.length === 0 ? shopList : shopList.filter(filterFn)}/>}
         {mode === constants.MAP &&

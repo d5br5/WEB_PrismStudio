@@ -8,6 +8,11 @@ import {infos} from "../assets/geoInfos"
 const Container = styled.div`
   margin-top: 90px;
   width: 1200px;
+  
+  @media only screen and (max-width: 1300px){
+    width: 100%;
+  }
+  
 `;
 
 const upload = async ()=>{
