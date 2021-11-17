@@ -33,6 +33,12 @@ const PricePrinter = styled.div`
   margin: 10px 0 0;
 `
 
+const CustomAccordian = styled(Accordion)`
+  
+  @media only screen and (min-width: 1300px){
+    right: 100px;
+  }
+`
 
 const Filter = ({filterEditing, setFilterEditing, setFilterList}) => {
     const [expanded, setExpanded] = React.useState(false);
@@ -76,8 +82,8 @@ const Filter = ({filterEditing, setFilterEditing, setFilterList}) => {
         setExpanded(false);
     }
 
-    return <Accordion expanded={expanded === 'panel1'}
-                      sx={{width: "400px", position: "absolute", top: "40px", right: "100px", zIndex: 30}}
+    return <CustomAccordian expanded={expanded === 'panel1'}
+                      sx={{width: "340px", position: "absolute", top: "40px",  zIndex: 30}}
                       onChange={handleChange('panel1')}>
         <AccordionSummary
             expandIcon={<ExpandMoreIcon/>}
@@ -123,7 +129,7 @@ const Filter = ({filterEditing, setFilterEditing, setFilterList}) => {
                 </PartContainer>
                 <PartContainer>
                     <PartTitle style={{marginBottom:20}}>지역</PartTitle>
-                    {Locations.map((a,i)=><FormControlLabel key={i} sx={{width:"48%", height:"30px"}} control={<Checkbox onChange={()=>{setFilterEditing(true)}}/>} label={a} name={"local"} value={a}/>)}
+                    {Locations.map((a,i)=><FormControlLabel key={i} sx={{width:"47%", height:"30px", fontSize:"0.7rem"}} control={<Checkbox onChange={()=>{setFilterEditing(true)}}/>} label={a} name={"local"} value={a}/>)}
                 </PartContainer>
 
                 <Button disabled={!filterEditing} sx={{marginBottom: "15px"}}
@@ -133,7 +139,7 @@ const Filter = ({filterEditing, setFilterEditing, setFilterList}) => {
             </Form>
 
         </AccordionDetails>
-    </Accordion>
+    </CustomAccordian>
 }
 
 export default Filter;
