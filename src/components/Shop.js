@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import {getGrade} from "../assets/getGrade";
+import {doc, getFirestore, increment, updateDoc} from "firebase/firestore";
+import app from "../fbase";
 
 const Container = styled.div`
   width: 100%;
@@ -95,6 +97,16 @@ const Shop = ({shop, index}) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const db = getFirestore(app);
+
+    async function onCountClick(saveLocation) {
+        const mapRef = doc(db, "counts", saveLocation);
+        await updateDoc(mapRef, {
+            count: increment(1)
+        });
+    }
+
+
     return (<Container>
             <Accordion expanded={expanded === 'panel1'}
                        sx={{width: "70%"}}
@@ -132,12 +144,12 @@ const Shop = ({shop, index}) => {
                 </AccordionDetails>
             </Accordion>
             <LinkContainer>
-                <Link href={`${shop.reservationLink}`} rel="noreferrer" target={"_blank"}>
+                <Link onClick={()=>onCountClick("listreservation")} href={`${shop.reservationLink}`} rel="noreferrer" target={"_blank"}>
                     <CustomButton variant="outlined" sx={{fontSize:"0.9rem"}}>
                         예약
                     </CustomButton>
                 </Link>
-                <Link href={`${shop.website}`} rel="noreferrer" target={"_blank"}>
+                <Link onClick={()=>onCountClick("listinfo")} href={`${shop.website}`} rel="noreferrer" target={"_blank"}>
                     <CustomButton variant="outlined" color="success" sx={{fontSize:"0.9rem"}}>
                         홈페이지 방문
                     </CustomButton>

@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import {getMarker} from "../assets/getMarker";
+import {getFirestore, doc, updateDoc, increment} from "firebase/firestore";
+import app from "../fbase";
 
 const {naver} = window;
 
@@ -12,6 +14,15 @@ const Container = styled.div`
 
 const MapController = ({shopList}) => {
     useEffect(() => {
+
+        const db = getFirestore(app);
+
+        async function onCountClick(location) {
+            const mapRef = doc(db, "counts", location);
+            await updateDoc(mapRef, {
+                count: increment(1)
+            });
+        }
 
         const HOME_PATH = window.HOME_PATH || '.';
         const container = document.getElementById('map');
@@ -26,7 +37,6 @@ const MapController = ({shopList}) => {
 
         for (let i = 0, ii = latlngs.length; i < ii; i++) {
             const position = latlngs[i];
-
             let content = `
             <div style="padding:15px 20px; display: flex; flex-direction: column">
                 <div style="text-align: center; font-weight: 800; font-size: 18px; margin-bottom: 20px">${shopList[i].name}</div>
@@ -38,7 +48,7 @@ const MapController = ({shopList}) => {
                     <div style="margin-bottom: 13px">연락처 : ${shopList[i].contact}</div>
                     <div style="margin-bottom: 2px; display: flex; flex-direction: row; justify-content: space-around">
                         <a href=${shopList[i].reservationLink} rel="noreferrer" target="_blank"> 
-                            <button style="border: 1px #e74c3c solid; border-radius:2px; background-color: white; color: #e74c3c; line-height: 17px">예약하기</button>
+                            <button  style="border: 1px #e74c3c solid; border-radius:2px; background-color: white; color: #e74c3c; line-height: 17px">예약하기</button>
                         </a>
                         <a href=${shopList[i].website} rel="noreferrer" target="_blank">
                             <button style="border: 1px #2980b9 solid; border-radius:2px; background-color: white; color: #2980b9;  line-height: 17px">홈페이지</button>
@@ -62,10 +72,13 @@ const MapController = ({shopList}) => {
                     infowindow.close();
                 } else {
                     infowindow.open(map, marker);
+                    onCountClick("mapclick");
                 }
             });
+
         }
-    }, [shopList])
+
+    }, [shopList]);
 
     return (
         <Container id="map" style={{width: "100%", height: "100vh"}}/>
