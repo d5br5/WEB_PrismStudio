@@ -8,47 +8,60 @@ import {useState} from "react";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../components/Logo";
 
-
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
 `;
 
-
-
 const MainPresenter = ({shopList, mode, setMode}) => {
-    const [filterList, setFilterList] = useState([]);
-    const [filterEditing, setFilterEditing] = useState(true);
+	const [filterList, setFilterList] = useState([]);
+	const [filterEditing, setFilterEditing] = useState(true);
 
-    const filterFn = (shop) => {
-        const minPriceStandard = parseInt(shop.basePrice) >= filterList[0];
-        const maxPriceStandard = parseInt(shop.basePrice) <= filterList[1];
-        const PriceStandard = (minPriceStandard && maxPriceStandard) || shop.basePrice === "x"
+	const filterFn = (shop) => {
+		const minPriceStandard = parseInt(shop.basePrice) >= filterList[0];
+		const maxPriceStandard = parseInt(shop.basePrice) <= filterList[1];
+		const PriceStandard =
+			(minPriceStandard && maxPriceStandard) || shop.basePrice === "x";
 
-        const minGradeStandard = parseFloat(shop.grade) >= filterList[2];
-        const maxGradeStandard = parseFloat(shop.grade) <= filterList[3];
-        const GradeStandard = (minGradeStandard && maxGradeStandard);
+		const minGradeStandard = parseFloat(shop.grade) >= filterList[2];
+		const maxGradeStandard = parseFloat(shop.grade) <= filterList[3];
+		const GradeStandard = minGradeStandard && maxGradeStandard;
 
-        const LocationStandard = filterList[4].length === 0 || filterList[4].includes(shop.location)
+		const LocationStandard =
+			filterList[4].length === 0 || filterList[4].includes(shop.location);
 
-        return PriceStandard && GradeStandard && LocationStandard;
-    }
-    const isTabletOrMobile = useMediaQuery({maxWidth: 1300})
+		return PriceStandard && GradeStandard && LocationStandard;
+	};
+	const isTabletOrMobile = useMediaQuery({maxWidth: 1300});
 
+	return (
+		<Container>
+			{!isTabletOrMobile && <Logo />}
+			{!isTabletOrMobile && <Navigator mode={mode} setMode={setMode} />}
+			<Filter
+				setFilterEditing={setFilterEditing}
+				filterEditing={filterEditing}
+				setFilterList={setFilterList}
+			/>
 
-    return <Container>
-
-        {!isTabletOrMobile && <Logo/>}
-        {!isTabletOrMobile && <Navigator mode={mode} setMode={setMode}/>}
-        <Filter setFilterEditing={setFilterEditing} filterEditing={filterEditing} setFilterList={setFilterList}/>
-
-        {mode === constants.LIST &&
-        <ListPresenter shopList={filterList.length === 0 ? shopList : shopList.filter(filterFn)}/>}
-        {mode === constants.MAP &&
-        <MapController shopList={filterList.length === 0 ? shopList : shopList.filter(filterFn)}/>}
-    </Container>
-}
+			{mode === constants.LIST && (
+				<ListPresenter
+					shopList={
+						filterList.length === 0 ? shopList : shopList.filter(filterFn)
+					}
+				/>
+			)}
+			{mode === constants.MAP && (
+				<MapController
+					shopList={
+						filterList.length === 0 ? shopList : shopList.filter(filterFn)
+					}
+				/>
+			)}
+		</Container>
+	);
+};
 
 export default MainPresenter;
