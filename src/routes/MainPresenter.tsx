@@ -3,7 +3,7 @@ import ListPresenter from "./ListPresenter";
 import * as constants from "../assets/const";
 import Navigator from "../components/Navigator";
 import Filter from "../components/Filter";
-import MapController from "./MapController";
+import MapController from "./MapPresenter";
 import {useState} from "react";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../components/Logo";
