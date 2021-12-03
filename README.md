@@ -63,3 +63,16 @@
   - check 클릭된 box는 아래와 같이 select
     - const query = 'input[name="local"]:checked';
 - 적용 버튼 클릭시, 위 조건들에 해당하는 shop들을 filtering하여 filteredShop 배열에 저장
+
+### Shop
+  address : "서울특별시 서대문구 XX동 XXX"   
+  basePeople : "2"   
+  basePrice : "40000"    
+  contact : "010-1234-5678"   
+  grade : "4.96"   
+  lat : "37.55674"    
+  lng : "126.9366"  
+  name : "셀프스튜디오 성동점"  
+  reservationLink : "https://naver.me/xxxx"  
+  reviewNum : "23"  
+  website : "https://www.ootmode.com"  
