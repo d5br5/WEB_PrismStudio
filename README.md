@@ -1,5 +1,7 @@
 # Prism Studio
 
+![image](https://user-images.githubusercontent.com/40906871/144601334-d84a102f-6679-4dd3-8586-ffce91f747b5.png)
+
 
 ## About the Project
 
@@ -18,6 +20,7 @@
 
 ### Built with
 
+- Typescript
 - Reactjs
 - Firebase
 - MaterialUI
@@ -32,3 +35,31 @@
 - 고객 건의 : 지역 확장 요청, 누락 업체 보완 요청 등 총 5건
 
 ## Detail
+
+### App
+- <GlobalStyles/> : 기본 css를 초기화하고, 태그별 초기 상태값 지정
+- <MainController/> : firebase에 저장된 shop들을 모두 불러와 shopList 상태변수에 저장후 mode에 맞는 View 출력
+  - mode : map(지도 api위에 마커 표시), list(리스트 형태로 shop 출력)
+- channel talk : 서비스 이용자 응대를 위한 채널톡 모듈 삽입
+
+### Map
+- Naver Map API를 요청하여 100vh, 100vw로 배경 삽입
+- 서울 지역이 한눈에 보이도록 zoom level 적절히 설정
+- 불러온 shop들의 좌표들 각각에 대응되는 마커 설정
+  - 마커 클릭시 shop의 세부 정보 표시(연락처, 가격, 주소 등)
+  - 마커 클릭수 집계를 위해 firebase DB내 mapMarketCount 변수 increment event 추가
+
+### List
+- firebase DB에서 불러온 shop들을 list로 나열
+- 리스트 각 항목은 material UI 라이브러리 사용하여 아코디언으로 표시
+  - 접힘 상태에서는 별점, 상호명, 주소, 연결 링크 확인 가능
+  - 펼침 상태에서는 그 외 가격, 연락처, 리뷰 수, 기준 인원 확인 가능
+- 각 업체 공식 웹사이트, 예약 사이트로 연결되는 링크 버튼
+
+### Filter
+- 기준 가격, 네이버 평점 - slider 활용
+  - slider 값은 상태변수로 저장. 
+- 지역구 - check box 활용
+  - check 클릭된 box는 아래와 같이 select
+    - const query = 'input[name="local"]:checked';
+- 적용 버튼 클릭시, 위 조건들에 해당하는 shop들을 filtering하여 filteredShop 배열에 저장
