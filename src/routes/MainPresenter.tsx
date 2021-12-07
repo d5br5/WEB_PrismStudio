@@ -3,7 +3,7 @@ import ListPresenter from "./ListPresenter";
 import * as constants from "../assets/const";
 import Navigator from "../components/Navigator";
 import Filter from "../components/Filter";
-import MapController from "./MapPresenter";
+import MapPresenter from "./MapPresenter";
 import {useState} from "react";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../components/Logo";
@@ -36,7 +36,7 @@ const MainPresenter = ({shopList, mode, setMode}: Iprops) => {
 		const GradeStandard = minGradeStandard && maxGradeStandard;
 
 		const LocationStandard =
-			filterList[4].length === 0 || filterList[4].includes(shop.location);
+			filterList[2].length === 0 || filterList[2].includes(shop.location);
 
 		return PriceStandard && GradeStandard && LocationStandard;
 	};
@@ -55,14 +55,14 @@ const MainPresenter = ({shopList, mode, setMode}: Iprops) => {
 			{mode === constants.LIST && (
 				<ListPresenter
 					shopList={
-						filterList.length === 0 ? shopList : shopList.filter(filterFn)
+						filterList?.length === 0 ? shopList : shopList.filter(filterFn)
 					}
 				/>
 			)}
 			{mode === constants.MAP && (
-				<MapController
+				<MapPresenter
 					shopList={
-						filterList.length === 0 ? shopList : shopList.filter(filterFn)
+						filterList?.length === 0 ? shopList : shopList.filter(filterFn)
 					}
 				/>
 			)}

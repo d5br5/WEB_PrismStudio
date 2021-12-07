@@ -15,7 +15,7 @@ interface Iprops {
 	shopList: Shop[];
 }
 
-const MapController = ({shopList}: Iprops) => {
+const MapPresenter = ({shopList}: Iprops) => {
 	useEffect(() => {
 		const db = getFirestore(app);
 
@@ -106,4 +106,4 @@ const MapController = ({shopList}: Iprops) => {
 	return <Container id="map" style={{width: "100%", height: "100vh"}} />;
 };
 
-export default MapController;
+export default MapPresenter;
